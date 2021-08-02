@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const {User} = require("./models/User")
 const config = require("./config/key.js")
+const {auth} = require("./middleware/auth")
 
 //application/x-www-form-unlencoded 정보를 받아주기 위함
 app.use(bodyParser.urlencoded({extended: true}))
@@ -13,6 +14,7 @@ app.use(bodyParser.json())
 app.use(cookieParser())
 
 const mongoose = require('mongoose')
+const { read } = require('node-id3')
 // const { createTrue } = require('typescript')
 mongoose.connect(config.mongoURI,{
     useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
@@ -24,7 +26,7 @@ mongoose.connect(config.mongoURI,{
 app.get('/',(req,res) => res.send('Hello World! test'))
 
 
-app.post('/register',(req,res) => {
+app.post('/api/users/register',(req,res) => {
   //회원가입할때 필요한 정보들을 client에서 가져오면 
   //그것들을 데이터베이스에 넣어준다.
 
@@ -37,7 +39,7 @@ app.post('/register',(req,res) => {
   })//mongoDB method
 })
 
-app.post('/login',(req,res)=>{
+app.post('/api/users/login',(req,res)=>{
   User.findOne({email: req.body.email}, (err,user)=>{
     if(!user){
       return res.json({
@@ -66,6 +68,29 @@ app.post('/login',(req,res)=>{
     })
   })
 })
+//auth = 미들웨어
+app.get('/api/users/auth', auth, (req,res)=>{
+  //auth가 통과가 됐으면 서버에서 정보들을 가져와서 클라이언트에 치환한다
+  res.status(200).json({
+    _id: req.user._id,
+    isAdmin: req.user.role === 0 ? false : true, //0이 아니면 어드민
+    isAuth: true,
+    email: req.user.email,
+    name: req.user.name,
+    lastname: req.user.lastname,
+    role: req.user.role,
+    image: req.user.image
+  })
+})
 
+app.get('/api/users/logout',auth,(req,res)=>{
+  User.findOneAndUpdate({_id: req.user._id},
+    {token: ""}, (err,user)=>{
+      if(err) return res.json({success: false, err});
+      return res.status(200).send({
+        success: true
+      })
+    })
+})
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port,() => console.log(`Example app listening on port ${port}!`))
