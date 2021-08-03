@@ -12,7 +12,9 @@ let auth = (req, res, next)=>{
 
         req.token = token;
         req.user = user;
-        next();
+        next();//콜백함수가 없으면 next를 써줘야한다
+        //schema.methods 나 statics 로 함수를 만들면 콜백함수를
+        //매개변수로 사용할 수 있다
     })
     //유저가 있으면 인증이 된다
 

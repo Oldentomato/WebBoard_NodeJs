@@ -3,9 +3,9 @@ const app = express()
 const port = 3000
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
-const {User} = require("./models/User")
-const config = require("./config/key.js")
-const {auth} = require("./middleware/auth")
+const {User} = require("./server/models/User")
+const config = require("./server/config/key.js.js")
+const {auth} = require("./server/middleware/auth")
 
 //application/x-www-form-unlencoded 정보를 받아주기 위함
 app.use(bodyParser.urlencoded({extended: true}))
@@ -68,9 +68,16 @@ app.post('/api/users/login',(req,res)=>{
     })
   })
 })
+//post는 req.body에 담아주지만
+//get은 body에 담지 않는다
+
 //auth = 미들웨어
 app.get('/api/users/auth', auth, (req,res)=>{
   //auth가 통과가 됐으면 서버에서 정보들을 가져와서 클라이언트에 치환한다
+  //미들웨어는 양 쪽을 연결하여 데이터를 주고받을 수 있도록 중간에서 매개 역할을 하는 소프트웨어, 
+  //네트워크를 통해서 연결된 여러 개의 컴퓨터에 있는 많은 프로세스들에게 어떤 서비스를 
+  //사용할 수 있도록 연결해주는 소프트웨어
+
   res.status(200).json({
     _id: req.user._id,
     isAdmin: req.user.role === 0 ? false : true, //0이 아니면 어드민
@@ -84,6 +91,8 @@ app.get('/api/users/auth', auth, (req,res)=>{
 })
 
 app.get('/api/users/logout',auth,(req,res)=>{
+  //get은 정보조회용이기에 내용이 바뀌지 않는다 
+  //그러기에 findOneAndUpdate를 이용해 정보를 바꿔주는것이다
   User.findOneAndUpdate({_id: req.user._id},
     {token: ""}, (err,user)=>{
       if(err) return res.json({success: false, err});
