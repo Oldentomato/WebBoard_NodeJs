@@ -1,10 +1,10 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 5000
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const {User} = require("./server/models/User")
-const config = require("./server/config/key.js.js")
+const config = require("./server/config/key.js")
 const {auth} = require("./server/middleware/auth")
 
 //application/x-www-form-unlencoded 정보를 받아주기 위함
@@ -100,6 +100,10 @@ app.get('/api/users/logout',auth,(req,res)=>{
         success: true
       })
     })
+})
+
+app.get('/api/hello', (req,res)=>{
+  res.send("안녕하세요")
 })
 
 app.listen(port,() => console.log(`Example app listening on port ${port}!`))
