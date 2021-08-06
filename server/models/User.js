@@ -38,7 +38,7 @@ const userSchema = mongoose.Schema({
 userSchema.pre('save', function(next){//save 이전에 이 함수를 부른다
     var user = this;
     if(user.isModified('password')){
-        bcrypt.getSalt(saltRounds, function(err, salt){
+        bcrypt.genSalt(saltRounds, function(err, salt){
             if(err) return next(err)
     
             bcrypt.hash(user.password, salt, function(err,hash){

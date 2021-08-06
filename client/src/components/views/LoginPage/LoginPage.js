@@ -1,5 +1,4 @@
 import React,{useState} from 'react'
-import axios from 'axios'
 import {useDispatch} from 'react-redux'
 import {loginUser} from '../../../_actions/user_action';
 
@@ -24,12 +23,16 @@ function LoginPage(props) {
             email: Email,
             password: Password
         }
-        dispatch(loginUser(body))
+        dispatch(loginUser(body))//액션을 발생시키는 함수
         .then(response =>{
             if(response.payload.loginSuccess){
+                alert("환영합니다")
                 props.history.push('/')
             }else{
-                alert('Error')
+                alert(response.payload.message)
+                //response.payload 는 서버의 index에서 로그인 시도
+                //한 뒤의 결과 json파일을 가져온다(loginSuccess,message)
+
             }
         })
 
