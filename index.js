@@ -13,6 +13,10 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(cookieParser())
 
+//빌드 시 express 가 실행되도록 하는 코드
+//app.use(express.static(path.join(__dirname, './client/build')))
+
+
 const mongoose = require('mongoose')
 const { read } = require('node-id3')
 // const { createTrue } = require('typescript')
@@ -23,7 +27,7 @@ mongoose.connect(config.mongoURI,{
 
 
 
-app.get('/',(req,res) => res.send('Hello World! test'))
+//app.get('/',(req,res) =>  res.sendFile(path.join(__dirname,'./client/build/index.html')))
 
 
 app.post('/api/users/register',(req,res) => {
@@ -67,6 +71,7 @@ app.post('/api/users/login',(req,res)=>{
 
     })
   })
+  //res.sendFile(path.join(__dirname,'./client/build/index.html'))
 })
 //post는 req.body에 담아주지만
 //get은 body에 담지 않는다
@@ -88,6 +93,7 @@ app.get('/api/users/auth', auth, (req,res)=>{
     role: req.user.role,
     image: req.user.image
   })
+  //res.sendFile(path.join(__dirname,'./client/build/index.html'))
 })
 
 app.get('/api/users/logout',auth,(req,res)=>{
@@ -100,10 +106,8 @@ app.get('/api/users/logout',auth,(req,res)=>{
         success: true
       })
     })
+    //res.sendFile(path.join(__dirname,'./client/build/index.html'))
 })
 
-app.get('/api/hello', (req,res)=>{
-  res.send("안녕하세요")
-})
 
 app.listen(port,() => console.log(`Example app listening on port ${port}!`))

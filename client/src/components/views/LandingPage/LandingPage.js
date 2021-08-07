@@ -1,19 +1,27 @@
 import React,{ useEffect, useState} from 'react'
 import axios from 'axios'
 import {withRouter} from 'react-router-dom'
+import {auth} from '../../../_actions/user_action'
+import {useDispatch} from 'react-redux'
 //여기다가 rfce만 치면 자동완성
 //es7 react를 설치해야함
 
 function LandingPage(props) {
+    const dispatch = useDispatch();
 
     useEffect(()=>{
-        // axios.get('/api/users/auth')
-        // .then(response=>{
-        //     setName(response.payload.name)
-        // })
-    },[])
+        dispatch(auth())
+        .then(response=>{
+            if(response.payload.isAdmin === true){
+                setName("관리자")
+            }else{
+                setName(response.payload.name)
+            }
 
-    // const [Name, setName] = useState("")
+        })
+    })
+
+    const [Name, setName] = useState("")
 
     const onClickHandler = () =>{
         axios.get('api/users/logout')
@@ -42,10 +50,10 @@ function LandingPage(props) {
             <button onClick={onClickHandler}>
                 로그아웃
             </button>
-            <br />
-            {/* <h1>
+            <br/>
+            <h3>
                 {Name}님 환영합니다
-            </h1> */}
+            </h3>
         </div>
     )
 }
