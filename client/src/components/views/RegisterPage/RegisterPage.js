@@ -53,7 +53,7 @@ function RegisterPage(props) {
     }
 
     return (
-        <div style={{
+        <div className="RegisterForm" style={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',

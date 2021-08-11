@@ -24,11 +24,14 @@ export default function ( SpecificComponent, option, adminRoute = null) {
                         alert("관리자용 페이지입니다")
                         props.history.push('/')
                     }else{//로그인이 되었는데 로그인페이지로 가려는경우
-                        props.history.push('/')
+                        if(option === false){
+                            props.history.push('/')
+                        }
+                        
                     }
                 }
             })
-        }, [])
+        })
         return (
             <div>
                 <SpecificComponent/>

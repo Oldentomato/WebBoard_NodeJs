@@ -1,0 +1,17 @@
+.LandingPage
+{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+.LandingPage p 
+{
+    position: absolute;
+    font-size: 1.5em;
+    color: #fff;
+    right: 100px;
+    top: 10%;
+}
+

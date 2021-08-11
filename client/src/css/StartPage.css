@@ -92,19 +92,33 @@ section img
     object-fit: cover;
     pointer-events: none;
 }
+
 /*주변 색에 맞게 이미지 색감 채우기*/
 section img#moon
 {
     mix-blend-mode: screen;
 }
+
 section img#mountains_front
 {
     z-index: 10;
 }
+
+@keyframes spin{
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(359deg);
+    }
+}
+section img#stars
+{
+    animation: spin 100s infinite linear;
+}
 #text
 {
     position: absolute;
-    right: -350px;
     color: #fff;
     white-space: nowrap;
     font-size: 7.5vw;

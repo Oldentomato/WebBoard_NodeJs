@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {loginUser} from '../../../_actions/user_action';
 import {withRouter} from 'react-router-dom'
+import {Style} from '../../../css/LoginPage.css'
 
 function LoginPage(props) {
     const dispatch = useDispatch();
@@ -28,7 +29,7 @@ function LoginPage(props) {
         .then(response =>{
             if(response.payload.loginSuccess){
                 alert("환영합니다")
-                props.history.push('/')
+                props.history.push('/Board')
             }else{
                 alert(response.payload.message)
                 //response.payload 는 서버의 index에서 로그인 시도
@@ -41,21 +42,15 @@ function LoginPage(props) {
     }
 
     return (
-        <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '100%',
-            height: '100vh'
-        }}>
+        <div className="LoginForm" style={Style}>
             <form style={{
                 display:'flex',
                 flexDirection: 'column'
             }} onSubmit={onSubmitHandler}>
                 <label>Email</label>
-                <input type="email" value={Email} onChange={onEmailHandler} />
+                <input type="email" value={Email} placeholder="EMAIL" onChange={onEmailHandler} />
                 <label>Password</label>
-                <input type="password" value={Password} onChange={onPasswordHandler} />
+                <input type="password" value={Password} placeholder="PASSWORD" onChange={onPasswordHandler} />
                 <br/>
                 <button type="submit">Login</button>
             </form>

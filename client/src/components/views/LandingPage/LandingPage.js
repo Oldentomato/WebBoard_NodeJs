@@ -3,11 +3,14 @@ import axios from 'axios'
 import {withRouter} from 'react-router-dom'
 import {auth} from '../../../_actions/user_action'
 import {useDispatch} from 'react-redux'
+import {Style} from '../../../css/LandingPage.css'
 //여기다가 rfce만 치면 자동완성
 //es7 react를 설치해야함
 
 function LandingPage(props) {
     const dispatch = useDispatch();
+
+    const [Name, setName] = useState("");
 
     useEffect(()=>{
         dispatch(auth())
@@ -20,15 +23,16 @@ function LandingPage(props) {
 
         })
     })
+    
 
-    const [Name, setName] = useState("")
+    
 
     const onClickHandler = () =>{
         axios.get('api/users/logout')
         .then(response => {
             if(response.data.success){
                 alert("로그아웃하였습니다")
-                props.history.push("/login")
+                props.history.push("/")
 
             }else{
                 alert("로그아웃에 실패했습니다")
@@ -38,22 +42,15 @@ function LandingPage(props) {
 
 
     return (
-        <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '100%',
-            height: '100vh'
-        }}>
+        <div className="LandingPage" style={Style}>
             <h2>LandingPage</h2>
-
             <button onClick={onClickHandler}>
                 로그아웃
             </button>
             <br/>
-            <h3>
+            <p>
                 {Name}님 환영합니다
-            </h3>
+            </p>
         </div>
     )
 }

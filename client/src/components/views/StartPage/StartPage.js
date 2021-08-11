@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react'
+import React,{useState} from 'react'
 import {withRouter} from 'react-router-dom'
 import {Style} from '../../../css/StartPage.css'
 import StarImage from '../../../Images/stars.png'
@@ -20,28 +20,9 @@ function Startpage() {
     return (
         <div style={Style}>
             <div>
-                <title>Parallax Scrolling</title>
-                
-            </div>
-            <div>
-                <header style={{
-                        top: ScrollValue*0.5+'px'
-                    }}>
-                    <a href="#" className="logo">POLAROID</a>
-                    <ul>
-                        <li><a href="#" >Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Register</a></li>
-                        <li><a href="#" className="active">Login</a></li>
 
-                    </ul>
-                </header>
                 <section>
-                    <img src={StarImage} id="stars" style={{
-                        left: ScrollValue*0.25+'px'
-                    }}
-
-                    />
+                    <img src={StarImage} id="stars"/>
                     <img src={MoonImage} id="moon" style={{
                         top: ScrollValue*1.05+'px'
                     }}/>
@@ -51,7 +32,7 @@ function Startpage() {
                     <h2 id="text" style={{
                         marginRight: ScrollValue*4+'px',
                         marginTop: ScrollValue*1.5+'px',
-                    }}>Moon Light</h2>
+                    }}>WELCOME</h2>
                     <a href="#sec" id="btn" style={{
                         marginTop: ScrollValue*1.5+'px',
                     }}>Explore</a>
@@ -63,32 +44,17 @@ function Startpage() {
                 <div className="sec" id="sec">
                     <h2>Polaroid</h2>
                     <p>Polaroid에 오신것을 환영합니다<br/><br/>
-                    testtesttesttesttesttesttesttesttesttesttesttesttesttesttest
-                    testtesttesttesttesttesttesttesttesttesttesttesttesttesttest
-                    testtesttesttesttesttesttesttesttesttesttesttesttesttesttest
                     <br/><br/>
-                    testtesttesttesttesttesttesttesttesttesttesttesttesttesttest
-                    testtesttesttesttesttesttesttesttesttesttesttesttesttesttest
-                    testtesttesttesttesttesttesttesttesttesttesttesttesttesttest
-                    testtesttesttesttesttesttesttesttesttesttesttesttesttesttest
-                    testtesttesttesttesttesttesttesttesttesttesttesttesttesttest
-                    testtesttesttesttesttesttesttesttesttesttesttesttesttesttest
                     <br/><br/>
-                    testtesttesttesttesttesttesttesttesttesttesttesttesttesttest
-                    testtesttesttesttesttesttesttesttesttesttesttesttesttesttest
-                    testtesttesttesttesttesttesttesttesttesttesttesttesttesttest
                     <br/><br/>
-                    testtesttesttesttesttesttesttesttesttesttesttesttesttesttest
-                    testtesttesttesttesttesttesttesttesttesttesttesttesttesttest
-                    testtesttesttesttesttesttesttesttesttesttesttesttesttesttest
                     <br/><br/>
-                    testtesttesttesttesttesttesttesttesttesttesttesttesttesttest
-                    testtesttesttesttesttesttesttesttesttesttesttesttesttesttest
-                    testtesttesttesttesttesttesttesttesttesttesttesttesttesttest
                     <br/><br/>
-                    testtesttesttesttesttesttesttesttesttesttesttesttesttesttest
-                    testtesttesttesttesttesttesttesttesttesttesttesttesttesttest
-                    testtesttesttesttesttesttesttesttesttesttesttesttesttesttest
+                    <br/><br/>
+                    <br/><br/>
+                    <br/><br/>
+                    <br/><br/>
+                    <br/><br/>
+                    <br/><br/>
                     <br/><br/>
                     </p>
                 </div>
