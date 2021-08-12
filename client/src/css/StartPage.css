@@ -7,6 +7,7 @@
     font-family: 'Poppins', sans-serif;
     scroll-behavior: smooth;
 }
+
 body
 {
     min-height: 100vh;
@@ -14,51 +15,7 @@ body
     background: linear-gradient(#2b1055,#7597);
 }
 
-header
-{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 30px 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 10000;
-}
-header .logo
-{
-    color: #fff;
-    font-weight: 700;
-    text-decoration: none;
-    font-size: 2em;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-header ul
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-header ul li
-{
-    list-style: none;
-    margin-left: 20px;
-}
-header ul li a 
-{
-    text-decoration: none;
-    padding: 6px 15px;
-    color: #fff;
-    border-radius: 20px;
-}
-header ul li a:hover,
-header ul li a.active
-{
-    background: #fff;
-    color: #2b1055;
-}
+
 section 
 {
     position: relative;
@@ -96,6 +53,7 @@ section img
 /*주변 색에 맞게 이미지 색감 채우기*/
 section img#moon
 {
+    z-index: -1;
     mix-blend-mode: screen;
 }
 
@@ -104,6 +62,10 @@ section img#mountains_front
     z-index: 10;
 }
 
+section img#stars
+{
+    animation: spin 100s infinite linear;
+}
 @keyframes spin{
     from{
         transform: rotate(0deg);
@@ -112,10 +74,7 @@ section img#mountains_front
         transform: rotate(359deg);
     }
 }
-section img#stars
-{
-    animation: spin 100s infinite linear;
-}
+
 #text
 {
     position: absolute;

@@ -10,6 +10,7 @@ import LoginPage from "./components/views/LoginPage/LoginPage"
 import RegisterPage from "./components/views/RegisterPage/RegisterPage"
 import StartPage from "./components/views/StartPage/StartPage"
 import NavBar from "./components/views/NavBar/NavBar"
+import CreatePage from "./components/views/CreatePage/CreatePage"
 import Auth from "./hoc/auth";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route exact path ="/Login" component={Auth(LoginPage,false)} />
         <Route exact path ="/Register" component={Auth(RegisterPage,false)} />
         <Route exact path = "/" component={Auth(StartPage, null)}/>
+        <Route exact path = "/Create" component={Auth(CreatePage, true)}/>
       </Switch>
     </Router>
   );

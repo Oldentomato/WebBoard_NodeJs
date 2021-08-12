@@ -2,7 +2,8 @@ import axios from 'axios'
 import {
     LOGIN_USER,
     REGISTER_USER,
-    AUTH_USER
+    AUTH_USER,
+    CREATE_BOARD
 } from './types';
 
 export function loginUser(dataTosubmit){
@@ -32,5 +33,15 @@ export function auth(){
     return {
        type: AUTH_USER,
        payload: request
+    }
+}
+
+export function create(dataTosubmit){
+    const request = axios.post('api/board/create',dataTosubmit)
+    .then(response => response.data)
+
+    return {
+        type: CREATE_BOARD,
+        payload: request
     }
 }

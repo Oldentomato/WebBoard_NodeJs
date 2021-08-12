@@ -27,8 +27,6 @@ mongoose.connect(config.mongoURI,{
 
 
 
-//app.get('/',(req,res) =>  res.sendFile(path.join(__dirname,'./client/build/index.html')))
-
 
 app.post('/api/users/register',(req,res) => {
   //회원가입할때 필요한 정보들을 client에서 가져오면 
@@ -109,5 +107,14 @@ app.get('/api/users/logout',auth,(req,res)=>{
     //res.sendFile(path.join(__dirname,'./client/build/index.html'))
 })
 
+app.post('/api/board/create',(req,res)=>{
+  const content = req.body;
+  content.save((err)=>{
+    if(err) return res.json({success: false, err})
+    return res.status(200).json({
+      success: true
+    })
+  })
+})
 
 app.listen(port,() => console.log(`Example app listening on port ${port}!`))

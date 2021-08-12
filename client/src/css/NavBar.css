@@ -1,0 +1,80 @@
+.NavBar p 
+{
+    position: absolute;
+    font-size: 1.5em;
+    color: #fff;
+    left: 53%;
+    top: 70%;
+}
+.UserIn 
+{
+    opacity: 1
+}
+.UserOut 
+{
+    opacity: 0
+}
+.NavBar header
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150%;
+    padding: 30px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10000;
+}
+.NavBar .logo
+{
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 3em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+.NavBar header ul
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 100%;
+}
+.NavBar header ul li
+{
+    list-style: none;
+    margin-left: 20px;
+}
+.NavBar header ul li a 
+{
+    text-decoration: none;
+    padding: 6px 15px;
+    color: #fff;
+    border-radius: 20px;
+}
+.NavBar header ul li a:hover,
+.NavBar header ul li a.active
+{
+    background: #fff;
+    color: #2b1055;
+}
+.NavBar button
+{
+    color: #2b1055;
+    text-decoration: none;
+    display: inline-block;
+    padding: 6px 15px;
+    border-radius: 20px;
+    transition: 0.25s;
+    outline: none;
+    cursor: pointer;
+    border: none;
+
+}
+.NavBar button:hover
+{
+    background: #fff;
+    color: #2b1055;
+}

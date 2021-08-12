@@ -7,18 +7,18 @@
     height: 100vh;
     
 }
-div
+/* div
 {
     background: linear-gradient(#2b1055,#7597);
-}
-label
+} */
+.LoginForm label
 {
     color: #fff;
     font-weight: 500;
     text-decoration: none;
     font-size: 2em;
 }
-button
+.LoginForm button
 {
     color: #fff;
     text-decoration: none;
@@ -31,12 +31,12 @@ button
     border: none;
 
 }
-button:hover
+.LoginForm button:hover
 {
     background: #fff;
     color: #2b1055;
 }
-input
+.LoginForm input
 {
     background: none;
     border: none;

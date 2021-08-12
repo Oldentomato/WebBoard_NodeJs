@@ -1,7 +1,8 @@
 import {
     LOGIN_USER,
     REGISTER_USER,
-    AUTH_USER
+    AUTH_USER,
+    CREATE_BOARD
 } from '../_actions/types';
 
 export default function (state = {},action){
@@ -14,6 +15,9 @@ export default function (state = {},action){
 
         case AUTH_USER:
             return {...state, userData: action.payload}
+
+        case CREATE_BOARD:
+            return {...state, boardData: action.payload}
 
         default:
             return state;
