@@ -37,7 +37,7 @@ export function auth(){
 }
 
 export function create(dataTosubmit){
-    const request = axios.post('api/board/create',dataTosubmit)
+    const request = axios.post('api/create',dataTosubmit)
     .then(response => response.data)
 
     return {

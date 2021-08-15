@@ -1,22 +1,32 @@
 const mongoose = require('mongoose');
 
 const boardSchema = mongoose.Schema({
-    postname:{
+    filepath:{
+        type: String,
+        maxlength: 200
+    },
+    title:{
         type: String,
         maxlength: 50
-    },
-    content_image:{
-        type: Image
     },
     content:{
         type: String,
         maxlength: 100
     },
+    views:{
+        type: Number,
+        default: 0
+    },
+    latitude:{
+        type: Number
+    },
+    longitude:{
+        type: Number
+    },
     username:{
-        type: String,
-        maxlength: 50
+        type: String
     }
-})
+},{timestamps: true})
 
 const Board = mongoose.model('Board',boardSchema)
 

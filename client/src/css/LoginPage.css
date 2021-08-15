@@ -7,10 +7,7 @@
     height: 100vh;
     
 }
-/* div
-{
-    background: linear-gradient(#2b1055,#7597);
-} */
+
 .LoginForm label
 {
     color: #fff;
@@ -20,7 +17,6 @@
 }
 .LoginForm button
 {
-    color: #fff;
     text-decoration: none;
     display: inline-block;
     padding: 6px 15px;
@@ -33,7 +29,7 @@
 }
 .LoginForm button:hover
 {
-    background: #fff;
+    background: rgb(81, 212, 109);
     color: #2b1055;
 }
 .LoginForm input
