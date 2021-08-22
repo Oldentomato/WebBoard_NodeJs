@@ -20,7 +20,7 @@ function LoginPage(props) {
     }
 
     const onSubmitHandler = (e) => {
-        e.preventDefault();//이 함수가 있으면 페이지가 refresh를 하지 않는다
+        //e.preventDefault();//이 함수가 있으면 페이지가 refresh를 하지 않는다
         let body ={
             email: Email,
             password: Password

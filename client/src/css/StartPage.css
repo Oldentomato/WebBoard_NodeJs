@@ -13,6 +13,7 @@ body
     min-height: 100vh;
     overflow-x: hidden;
     background: linear-gradient(#2b1055,#7597);
+
 }
 
 
@@ -65,6 +66,7 @@ section img#mountains_front
 section img#stars
 {
     animation: spin 100s infinite linear;
+    
 }
 @keyframes spin{
     from{

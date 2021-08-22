@@ -4,7 +4,16 @@ const port = 5000
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const config = require("./server/config/key.js")
+const cors = require('cors');
 
+
+//카카오api 를 허용하기위한 cors
+const options={
+  origin: 'http://dapi.kakao.com/v2/maps/sdk.js',
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+app.use(cors(options))
 
 //application/x-www-form-unlencoded 정보를 받아주기 위함
 app.use(bodyParser.urlencoded({extended: true}))

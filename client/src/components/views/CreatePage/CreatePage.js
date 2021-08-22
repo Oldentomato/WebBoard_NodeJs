@@ -20,6 +20,7 @@ function CreatePage() {
     const [FilePath, setFilePath] = useState("");
     const [Latitude, setLatitude] = useState("");
     const [Longitude, setLongitude] = useState("");
+    const [CautionGPS, setCautionGPS] = useState("");
 
     const handleChangeTitle = (e) =>{
         setTitle(e.currentTarget.value)
@@ -31,27 +32,34 @@ function CreatePage() {
 
     const onSubmit = (e) =>{
         e.preventDefault();
+
+        //정보 서버올림
         const variables = {
+            writer: user.userData._id,
             filepath: FilePath,
             title: title,
             content: Content,
             latitude: Latitude,
-            longitude: Longitude,
-            username: user.userData.name
+            longitude: Longitude
         }
-        console.log(variables)
-        axios.post('/api/board/uploadinfo',variables)
-        .then(response =>{
-            if(response.data.success){
-                alert("업로드에 성공했습니다")
-                window.location.replace("/Board")
-            }else{
-                alert('업로드에 실패했습니다')
-            }
-        })
+        if(title === "" || Content === "" || FilePath === ""){
+            alert("내용을 모두 입력해주십시오")
+        }else{
+            axios.post('/api/board/uploadinfo',variables)
+            .then(response =>{
+                if(response.data.success){
+                    alert("업로드에 성공했습니다")
+                    window.location.replace("/Board")
+                }else{
+                    alert('업로드에 실패했습니다')
+                }
+            })
+        }
+
     }
 
     const onDrop = (files) =>{
+        //사진 서버올림
         let formData = new FormData();
         const config = {
             header: {'content-type': 'multipart/form-data'}
@@ -62,45 +70,47 @@ function CreatePage() {
         axios.post('/api/board/uploadfiles', formData, config)//나중에 리덕스로 바꿔줘야한다
         .then(response=>{
             if(response.data.success){
-                //console.log(files[0].path)
-                EXIF.getData(files[0], function() {
-                    
-                    if(EXIF.getTag(files[0], "GPSLongitude") !== undefined){
-                        var exifLong = EXIF.getTag(files[0], "GPSLongitude");
-                        var exifLat = EXIF.getTag(files[0], "GPSLatitude");
-                        var exifLongRef = EXIF.getTag(files[0], "GPSLongitudeRef");
-                        var exifLatRef = EXIF.getTag(files[0], "GPSLatitudeRef");
-    
-                        var latitude;
-                        var longitude;
-                        
-    
-                        //계산식 적용이유는 해당라이브러리가 위도경도를 도분초 단위로 출력하기 때문
-                        if (exifLatRef === "S") {
-                            var latitude = (exifLat[0]*-1) + (( (exifLat[1]*-60) + (exifLat[2]*-1) ) / 3600);						
-                        } else {
-                            var latitude = exifLat[0] + (( (exifLat[1]*60) + exifLat[2] ) / 3600);
-                        }
-                
-                        if (exifLongRef === "W") {
-                            var longitude = (exifLong[0]*-1) + (( (exifLong[1]*-60) + (exifLong[2]*-1) ) / 3600);						
-                        } else {
-                            var longitude = exifLong[0] + (( (exifLong[1]*60) + exifLong[2] ) / 3600);
-                        }
-
-                        setLatitude(latitude);
-                        setLongitude(longitude);
-                    }
-                    else{
-                        console.log("no gps info")
-                    }
-
-                })
                 setFilePath(response.data.filePath)
             }else{
                 alert('failed to save the video in server')
             }
         })
+
+        EXIF.getData(files[0], function() {
+                    
+            if(EXIF.getTag(files[0], "GPSLongitude") !== undefined){
+                var exifLong = EXIF.getTag(files[0], "GPSLongitude");
+                var exifLat = EXIF.getTag(files[0], "GPSLatitude");
+                var exifLongRef = EXIF.getTag(files[0], "GPSLongitudeRef");
+                var exifLatRef = EXIF.getTag(files[0], "GPSLatitudeRef");
+
+                var latitude;
+                var longitude;
+                
+
+                //계산식 적용이유는 해당라이브러리가 위도경도를 도분초 단위로 출력하기 때문
+                if (exifLatRef === "S") {
+                    var latitude = (exifLat[0]*-1) + (( (exifLat[1]*-60) + (exifLat[2]*-1) ) / 3600);						
+                } else {
+                    var latitude = exifLat[0] + (( (exifLat[1]*60) + exifLat[2] ) / 3600);
+                }
+        
+                if (exifLongRef === "W") {
+                    var longitude = (exifLong[0]*-1) + (( (exifLong[1]*-60) + (exifLong[2]*-1) ) / 3600);						
+                } else {
+                    var longitude = exifLong[0] + (( (exifLong[1]*60) + exifLong[2] ) / 3600);
+                }
+                setCautionGPS("");
+                setLatitude(latitude);
+                setLongitude(longitude);
+            }
+            else{
+                setCautionGPS("NO GPS INFO")
+            }
+
+        })
+
+
     }
 
 
@@ -113,7 +123,7 @@ function CreatePage() {
                 <div style={{display: 'flex', justifyContent: 'space-between' }}>
                     <DropZone 
                         onDrop={onDrop}
-                        multiple={true}
+                        multiple={false}
                         maxSize={800000000}>
                             {({getRootProps, getInputProps})=>(
                                 <div style={{width: '300px', height: '240px', border: '1px solid lightgray',display: 'flex',alignItems: 'center', justifyContent: 'center'}}
@@ -124,10 +134,13 @@ function CreatePage() {
                                 </div>
                             )}
                         </DropZone>
+                        {FilePath}
 
                 </div>
                 <br /><br />
                 <h2 style={{color: '#fff'}}>*각 이미지혹은 동영상마다 자동으로 위치정보를 가져옵니다</h2>
+                <br />
+                {CautionGPS}
                 <br /><br />
                 <label>Title</label>
                 <Input

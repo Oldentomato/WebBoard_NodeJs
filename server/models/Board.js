@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const boardSchema = mongoose.Schema({
+    writer:{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     filepath:{
         type: String,
         maxlength: 200
@@ -22,9 +27,6 @@ const boardSchema = mongoose.Schema({
     },
     longitude:{
         type: Number
-    },
-    username:{
-        type: String
     }
 },{timestamps: true})
 
