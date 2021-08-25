@@ -1,8 +1,8 @@
 import {
-  BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
+import React,{Suspense} from 'react'
 
 
 import LandingPage from "./components/views/LandingPage/LandingPage"
@@ -16,17 +16,18 @@ import Auth from "./hoc/auth";
 
 function App() {
   return (
-    <Router>
+    <Suspense fallback={(<div>Loading...</div>)}>
       <NavBar/>
       <Switch>
-        <Route exact path ="/Board" component={Auth(LandingPage,true)}  />
+        <Route path ="/Boards" component={Auth(LandingPage,true)}  />
         <Route exact path ="/Login" component={Auth(LoginPage,false)} />
         <Route exact path ="/Register" component={Auth(RegisterPage,false)} />
         <Route exact path = "/" component={Auth(StartPage, null)}/>
         <Route exact path = "/Create" component={Auth(CreatePage, true)}/>
-        <Route exact path="/Board/:BoardId" component={Auth(DetailPage,null)}></Route>
+        
       </Switch>
-    </Router>
+      <Route exact path="/Boards/:BoardId" component={Auth(DetailPage,null)}/>
+      </Suspense>
   );
 }
 

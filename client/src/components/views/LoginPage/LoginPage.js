@@ -29,7 +29,7 @@ function LoginPage(props) {
         .then(response =>{
             if(response.payload.loginSuccess){
                 alert("환영합니다")
-                window.location.replace("/Board")
+                window.location.replace("/Boards")
             }else{
                 alert(response.payload.message)
                 //response.payload 는 서버의 index에서 로그인 시도

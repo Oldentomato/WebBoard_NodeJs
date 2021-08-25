@@ -49,7 +49,7 @@ function NavBar() {
                 <Link to="/" className="logo">POLAROID</Link>
                 <ul>
                     <li><a href="#" >Home</a></li>
-                    <li><Link to="/Board">Board</Link></li>
+                    <li><Link to="/Boards">Board</Link></li>
                     <li><Link to="/Register">Register</Link></li>
                     <li>{isUser ? <button onClick={onClickHandler}>LogOut</button>:
                     <Link to="/Login" className="active">Login</Link>}</li>

@@ -1,5 +1,4 @@
 import React,{useState} from 'react'
-import {withRouter} from 'react-router-dom'
 import {Typography, Button, Form, message, Input} from 'antd'
 import {PlusOutlined} from '@ant-design/icons'
 import DropZone from 'react-dropzone'
@@ -12,7 +11,7 @@ const {TextArea} = Input;
 
 
 
-function CreatePage() {
+function CreatePage(props) {
     const user = useSelector(state => state.user);
 
     const [title, setTitle] = useState("");
@@ -49,7 +48,7 @@ function CreatePage() {
             .then(response =>{
                 if(response.data.success){
                     alert("업로드에 성공했습니다")
-                    window.location.replace("/Board")
+                    window.location.replace("/Boards")
                 }else{
                     alert('업로드에 실패했습니다')
                 }
@@ -138,7 +137,7 @@ function CreatePage() {
 
                 </div>
                 <br /><br />
-                <h2 style={{color: '#fff'}}>*각 이미지혹은 동영상마다 자동으로 위치정보를 가져옵니다</h2>
+                <h2 style={{color: '#fff'}}>*업로드시 자동으로 이미지의 위치정보를 가져옵니다(EXIF 가필요)</h2>
                 <br />
                 {CautionGPS}
                 <br /><br />
@@ -162,4 +161,4 @@ function CreatePage() {
     )
 }
 
-export default withRouter(CreatePage)
+export default CreatePage

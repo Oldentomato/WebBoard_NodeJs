@@ -46,8 +46,17 @@ router.post("/uploadinfo",(req,res)=>{
   
 })
 
-router.get("/getimage",(req,res)=>{
+router.get("/getimages",(req,res)=>{
   Board.find()
+  .populate('writer')
+  .exec((err,board)=>{
+    if(err)return res.status(400).send(err);
+    res.status(200).json({success:true, board})
+  })
+})
+
+router.post("/getimage",(req,res)=>{
+  Board.findOne({"_id": req.body.BoardId})
   .populate('writer')
   .exec((err,board)=>{
     if(err)return res.status(400).send(err);
