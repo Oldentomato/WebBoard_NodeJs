@@ -17,6 +17,7 @@ function CreatePage(props) {
     const [title, setTitle] = useState("");
     const [Content, setContent] = useState("");
     const [FilePath, setFilePath] = useState("");
+    const [MusicFilePath, setMusicFilePath] = useState("");
     const [Latitude, setLatitude] = useState("");
     const [Longitude, setLongitude] = useState("");
     const [CautionGPS, setCautionGPS] = useState("");
@@ -36,6 +37,7 @@ function CreatePage(props) {
         const variables = {
             writer: user.userData._id,
             filepath: FilePath,
+            musicfilepath: MusicFilePath,
             title: title,
             content: Content,
             latitude: Latitude,
@@ -70,6 +72,7 @@ function CreatePage(props) {
         .then(response=>{
             if(response.data.success){
                 setFilePath(response.data.filePath)
+                setMusicFilePath(response.data.musicfilePath)
             }else{
                 alert('failed to save the video in server')
             }
@@ -134,6 +137,9 @@ function CreatePage(props) {
                             )}
                         </DropZone>
                         {FilePath}
+                        <br />
+                        {MusicFilePath}
+
 
                 </div>
                 <br /><br />

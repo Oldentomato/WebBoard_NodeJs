@@ -18,15 +18,15 @@ function App() {
   return (
     <Suspense fallback={(<div>Loading...</div>)}>
       <NavBar/>
+      <Route exact path="/Boards/:BoardId" component={Auth(DetailPage,null)}/>
       <Switch>
         <Route path ="/Boards" component={Auth(LandingPage,true)}  />
         <Route exact path ="/Login" component={Auth(LoginPage,false)} />
         <Route exact path ="/Register" component={Auth(RegisterPage,false)} />
         <Route exact path = "/" component={Auth(StartPage, null)}/>
-        <Route exact path = "/Create" component={Auth(CreatePage, true)}/>
-        
+        <Route exact path = "/Create" component={Auth(CreatePage, true)}/>   
       </Switch>
-      <Route exact path="/Boards/:BoardId" component={Auth(DetailPage,null)}/>
+     
       </Suspense>
   );
 }

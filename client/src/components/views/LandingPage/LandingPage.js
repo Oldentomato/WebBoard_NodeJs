@@ -34,32 +34,36 @@ function LandingPage(props) {
 
     const renderCards = Image.map((file, index)=>{
 
-         return( <Link to={`/Boards/${file._id}`}>
+         return(
         <Col lg={6} md={8} xs={24}>
-            <div style={{position: 'relative' , padding: '15px'}}>
-                <img style={{width: '400px', height: '320px'}} src={`http://localhost:5000/${file.filepath}`}/>  
+            <div style={{position: 'relative'}}>
+             <Link to={`/Boards/${file._id}`}>
             
-            </div>
+            
+                <img style={{width: '15em', height:'10em'}} src={`http://localhost:5000/${file.filepath}`}/>  
+            <br/>
+            <br/>
             <Meta 
                 avatar = {
                     <Avatar src={file.writer.image} />
                 }
                 title={file.title}
             />
-            <div style={{position: 'absoulte'}}>
+            <div>
                 <span style={{ color: '#fff'}}>{file.writer.name}</span><br />
                 <span style={{ marginLeft:'3rem', color: '#fff'}}>{file.views} views </span>
                 <span style={{color: '#fff'}}>{moment(file.createdAt).format("MMM Do YY")}</span>
             </div>
-
+            </Link>
+            </div>
         </Col>
-        </Link>
+        
 
          )
     })
 
     return (
-        <div className="LandingPage" style={{position: 'relative', padding: '5%', width: '85%', margin: '3rem auto'}}>
+        <div className="LandingPage" style={{position: 'relative', padding: '5%', width: '85%', margin: '4rem auto',background:'#7597'}}>
             <Link className = "writebtn" to="/Create">Write</Link>
             <Title level={2} style={{ color: '#fff'}}>Contents</Title>
             <hr />
