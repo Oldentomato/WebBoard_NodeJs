@@ -1,30 +1,36 @@
-import React,{useEffect, useState, useCallback} from 'react'
+import React,{useEffect, useState} from 'react'
 import {List, Avatar, Typography} from 'antd'
 import axios from 'axios'
 import Comment from './Sections/Comments'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faWindowClose} from '@fortawesome/free-regular-svg-icons'
+import moment from 'moment'
+
 
 const {kakao} = window;
 
 function DetailPage(props) {
 
     const BoardId = props.match.params.BoardId //App.js에 있는 :fileId를 참조
-    const [File, setFile] = useState([])
+    const [File, setFile] = useState("")
     const [CommentLists, setCommentLists] = useState([])
-    const [OpenMap, setOpenMap] = useState("")
+    const [OpenMap, setOpenMap] = useState(true)
+    const [Region, setRegion] = useState("")
+    const Views = props.location.state.views
 
     const fileVariable = {
-        BoardId : BoardId
+        BoardId : BoardId,
+        Views : Views
     }
-
-    const openMap = () =>{
-        setOpenMap(!OpenMap)
-        
-    }
-
-
 
     const SetMap = (lat, lon) =>{
         var container = document.getElementById("map");
+        var geocoder = new kakao.maps.services.Geocoder();
+        geocoder.coord2RegionCode(lon,lat,(result,status)=>{
+            if(status === kakao.maps.services.Status.OK){
+                setRegion(result[0].address_name)
+            }
+        })
         var options = {
             
             center: new kakao.maps.LatLng(lat, lon),
@@ -36,10 +42,15 @@ function DetailPage(props) {
             position: markerPosition
         });
         marker.setMap(map);
+        setOpenMap(false);
+    }
+
+    const openMap = () =>{
+        setOpenMap(!OpenMap)
     }
 
     const BackPage = () =>{
-        props.history.push("/Boards")
+        props.history.push('/Boards')
     }
 
     const updateComment = (newComment) =>{
@@ -47,11 +58,12 @@ function DetailPage(props) {
     }
 
     useEffect(()=>{
+
         axios.post('/api/board/getimage',fileVariable)
         .then(response=>{
             if(response.data.success){
                 setFile(response.data.board)
-                SetMap(response.data.board.latitude ,response.data.board.longitude)
+                SetMap(response.data.board.latitude,response.data.board.longitude)
             }else{
                 alert("게시물을 가져오는데 실패했습니다")
             }
@@ -66,32 +78,41 @@ function DetailPage(props) {
             }
         })
 
+
         
     },[])
 
+    if(File.writer){//axios에서 File정보를 받아오는데 시간이 걸려서 File부분이 undefiended가 될때가 있는데 이것을 로딩으로 메꿔줘서 에러를 방지한다
     return (
-        <div className="postPage" style={{position: 'absoulte', padding: '10rem 9em', background: 'rgba(0,0,0,0.4)'}}>
-            <div style={{background:"#E6E6E6",padding: '5em 10em'}}>
-                <div style={{left: '50%', top:'50%'}}>
-                <button onClick={BackPage}>exit</button>
+        <div className="postPage" style={{position:'absolute',padding: '6.5vw 6.5vw',width:'100%', background: 'rgba(0,0,0,0.5)',zIndex:'20',top:'0%'}}>
+            <div style={{position:'relative',background:"#E6E6E6",width:'60%', padding: '5em',marginLeft:'20%',borderRadius:'10px'}}>
+            <List.Item.Meta
+                    avatar={<Avatar src={File.writer && File.writer.image} />}
+                    title={<a style={{ fontSize:'25px', fontWeight:'700'}} href="https://ant.design">{File.title}</a>}                
+                />
+                <span style={{marginLeft:'50px'}}>{moment(File.createdAt).format("MMM Do YY")}</span>
+                <span style={{marginLeft:'50px'}}>writer:  {File.writer.name}</span>
+                <button style={{position:'absolute', border:'none', background:'none',cursor:'pointer',right:'5vw',top:'4vw'}}
+                 onClick={BackPage}><FontAwesomeIcon size="3x" icon={faWindowClose} /> </button>
+                
+
              <br />
-             <img style={{width: '50vw', height: '40vw',padding: '1em'}} src={`http://localhost:5000/${File.filepath}`}></img>
+             <img style={{position:'absoulte', width: '40vw', height: '30vw',padding: '1vw', marginLeft:'1vw', right:'5vw'}} src={`http://localhost:5000/${File.filepath}`}></img>
             
-             <div id="map" style={{width: '40vw', height:'30vw',padding: '1em'}}></div>
-             <button onClick={openMap}>맵열기</button>
+             <div id="map" style={{width: '40vw', height:'30vw',padding: '1vw', marginLeft:'1vw', display: OpenMap===true?'block':'none'}}></div>
+             <div style={{fontSize:'20px', display: OpenMap===false?'block':'none'}}>{Region}</div>
+             <button style={{border:'none', cursor:'pointer', color:'blue'}} onClick={openMap}>{OpenMap===false?'OpenMap':'CloseMap'}</button>
+             <hr/>
              <List.Item 
                 actions={[]}
              >
                 <List.Item.Meta
-                    avatar={<Avatar src />}
-                    title={<a style={{ fontSize:'30px'}} href="https://ant.design">{File.title}</a>}
                     description={<p style={{ fontSize:'20px'}}>{File.content}</p>}
                 />
                 <div></div>
                 
              </List.Item>
              <Comment CommentLists = {CommentLists} postId={File._id} refreshFunction={updateComment}/>
-                </div>
 
             </div>
 
@@ -99,6 +120,11 @@ function DetailPage(props) {
         </div>
 
     )
+    }else{
+        return(
+            <div style={{position:'fixed',color:'#fff', top:'0%'}}>Loading...</div>
+        )
+    }
 }
 
 export default DetailPage

@@ -28,7 +28,6 @@ function LoginPage(props) {
         dispatch(loginUser(body))//액션을 발생시키는 함수
         .then(response =>{
             if(response.payload.loginSuccess){
-                alert("환영합니다")
                 window.location.replace("/Boards")
             }else{
                 alert(response.payload.message)

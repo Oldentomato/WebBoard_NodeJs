@@ -31,7 +31,6 @@ function NavBar() {
         axios.get('api/users/logout')
         .then(response => {
             if(response.data.success){
-                alert("로그아웃하였습니다")
                 //props.history.push("/")
                 window.location.replace("/")
 

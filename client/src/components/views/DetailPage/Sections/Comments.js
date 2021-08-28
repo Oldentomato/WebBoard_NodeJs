@@ -3,6 +3,7 @@ import {Button, Input} from 'antd'
 import axios from 'axios'
 import {useSelector} from 'react-redux'
 import SingleComment from './SingleComment'
+import ReplyComment from './ReplyComment'
 
 const {TextArea} = Input
 
@@ -16,21 +17,27 @@ function Comments(props) {
     }
 
     const onSubmit = (e) => {
-        e.preventDefault();
-        const variables = {
-            content: Comment,
-            writer: user.userData._id,
-            postId: props.postId
+        if(Comment === ""){
+            alert("댓글을 입력하십시오")
         }
-        axios.post('/api/comment/saveComment', variables)
-        .then(response=>{
-            if(response.data.success){
-                setComment("")
-                props.refreshFunction(response.data.result)
-            }else{
-                alert('댓글저장에 실패했습니다')
+        else{
+            e.preventDefault();
+            const variables = {
+                content: Comment,
+                writer: user.userData._id,
+                postId: props.postId
             }
-        })
+            axios.post('/api/comment/saveComment', variables)
+            .then(response=>{
+                if(response.data.success){
+                    setComment("")
+                    props.refreshFunction(response.data.result)
+                }else{
+                    alert('댓글저장에 실패했습니다')
+                }
+            })
+        }
+
     }
 
     return (
@@ -43,6 +50,7 @@ function Comments(props) {
                 (!comment.responseTo &&                 
                 <React.Fragment>
                     <SingleComment comment = {comment} postId={props.postId} refreshFunction={props.refreshFunction}/>
+                    <ReplyComment CommentLists={props.CommentLists} postId={props.postId} parentCommentId={comment._id} refreshFunction={props.refreshFunction}/>
                 </React.Fragment>)
 
             ))}
@@ -53,6 +61,7 @@ function Comments(props) {
                     onChange = {handleChange}
                     value = {Comment}
                     placeholder="write some comments"
+                    required= 'required'
                 />
             <br/>
             <Button style={{width: '100px', height:'52px'}} onClick={onSubmit}>Submit</Button>

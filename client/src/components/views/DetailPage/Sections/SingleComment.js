@@ -22,26 +22,32 @@ function SingleComment(props) {
         <span onClick={openReply} key = "comment-basic-reply-to">Reply to</span>
     ]
 
-    const onSubmit = (e) =>{
-        e.preventDefault()
-
-        const variables = {
-            writer: user.userData._id,
-            postId: props.postId,
-            responseTo: props.comment._id,
-            content: CommentValue
+    const onSubmit = (e) =>{//답글저장부분
+        if(CommentValue === ""){
+            alert("댓글을 입력하십시오")
         }
-        axios.post('/api/comment/saveComment',variables)
-        .then(response=>{
-            if(response.data.success){
-                console.log(response.data.result)
-                setCommentValue("")
-                setOpenReply(!OpenReply)
-                props.refreshFunction(response.data.result)
-            }else{
-                alert('댓글 저장에 실패했습니다')
+        else{
+            e.preventDefault()
+
+            const variables = {
+                writer: user.userData._id,
+                postId: props.postId,
+                responseTo: props.comment._id,
+                content: CommentValue
             }
-        })
+            axios.post('/api/comment/saveComment',variables)
+            .then(response=>{
+                if(response.data.success){
+                    console.log(response.data.result)
+                    setCommentValue("")
+                    setOpenReply(!OpenReply)
+                    props.refreshFunction(response.data.result)
+                }else{
+                    alert('댓글 저장에 실패했습니다')
+                }
+            })
+        }
+
     }
 
     return (

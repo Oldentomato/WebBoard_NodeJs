@@ -56,13 +56,15 @@ router.get("/getimages",(req,res)=>{
 })
 
 router.post("/getimage",(req,res)=>{
-  Board.findOne({"_id": req.body.BoardId})
+  Board.findOneAndUpdate({_id: req.body.BoardId},
+  {views: req.body.Views})
   .populate('writer')
   .exec((err,board)=>{
     if(err)return res.status(400).send(err);
     res.status(200).json({success:true, board})
   })
 })
+
 
   module.exports = router
   
