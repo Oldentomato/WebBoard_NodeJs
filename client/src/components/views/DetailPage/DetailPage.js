@@ -5,6 +5,8 @@ import Comment from './Sections/Comments'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faWindowClose} from '@fortawesome/free-regular-svg-icons'
 import moment from 'moment'
+import Like from './Sections/Like'
+import {useSelector} from 'react-redux'
 
 
 const {kakao} = window;
@@ -17,6 +19,9 @@ function DetailPage(props) {
     const [OpenMap, setOpenMap] = useState(true)
     const [Region, setRegion] = useState("")
     const Views = props.location.state.views
+    const isGPS = props.location.state.isGPS
+    const user = useSelector(state=>state.user)
+
 
     const fileVariable = {
         BoardId : BoardId,
@@ -57,13 +62,26 @@ function DetailPage(props) {
         setCommentLists(CommentLists.concat(newComment))
     }
 
+    const CheckGPS = () => {
+        if(isGPS){
+            return(<div>
+            <div id="map" style={{width: '40vw', height:'30vw',padding: '1vw', marginLeft:'1vw', display: OpenMap===true?'block':'none'}}></div>
+            <div style={{fontSize:'20px', display: OpenMap===false?'block':'none'}}>{Region}</div>
+            <button style={{border:'none', cursor:'pointer', color:'blue'}} onClick={openMap}>{OpenMap===false?'OpenMap':'CloseMap'}</button>
+            </div>)
+        }else{
+            return(<div>NO GPS</div>)
+        }
+    }
+
     useEffect(()=>{
 
         axios.post('/api/board/getimage',fileVariable)
         .then(response=>{
             if(response.data.success){
                 setFile(response.data.board)
-                SetMap(response.data.board.latitude,response.data.board.longitude)
+                if(isGPS)
+                    SetMap(response.data.board.latitude,response.data.board.longitude) 
             }else{
                 alert("게시물을 가져오는데 실패했습니다")
             }
@@ -85,7 +103,7 @@ function DetailPage(props) {
     if(File.writer){//axios에서 File정보를 받아오는데 시간이 걸려서 File부분이 undefiended가 될때가 있는데 이것을 로딩으로 메꿔줘서 에러를 방지한다
     return (
         <div className="postPage" style={{position:'absolute',padding: '6.5vw 6.5vw',width:'100%', background: 'rgba(0,0,0,0.5)',zIndex:'20',top:'0%'}}>
-            <div style={{position:'relative',background:"#E6E6E6",width:'60%', padding: '5em',marginLeft:'20%',borderRadius:'10px'}}>
+            <div style={{position:'relative',background:"#E6E6E6",width:'56%',padding: '3vw',marginLeft:'20%',borderRadius:'10px'}}>
             <List.Item.Meta
                     avatar={<Avatar src={File.writer && File.writer.image} />}
                     title={<a style={{ fontSize:'25px', fontWeight:'700'}} href="https://ant.design">{File.title}</a>}                
@@ -98,20 +116,19 @@ function DetailPage(props) {
 
              <br />
              <img style={{position:'absoulte', width: '40vw', height: '30vw',padding: '1vw', marginLeft:'1vw', right:'5vw'}} src={`http://localhost:5000/${File.filepath}`}></img>
+
+            <List.Item 
+                actions={[<Like board boardId={BoardId} userId={user.userData._id}/>]}
+            />
+
+             {CheckGPS()}
             
-             <div id="map" style={{width: '40vw', height:'30vw',padding: '1vw', marginLeft:'1vw', display: OpenMap===true?'block':'none'}}></div>
-             <div style={{fontSize:'20px', display: OpenMap===false?'block':'none'}}>{Region}</div>
-             <button style={{border:'none', cursor:'pointer', color:'blue'}} onClick={openMap}>{OpenMap===false?'OpenMap':'CloseMap'}</button>
-             <hr/>
-             <List.Item 
-                actions={[]}
-             >
+             
                 <List.Item.Meta
                     description={<p style={{ fontSize:'20px'}}>{File.content}</p>}
                 />
-                <div></div>
                 
-             </List.Item>
+             
              <Comment CommentLists = {CommentLists} postId={File._id} refreshFunction={updateComment}/>
 
             </div>

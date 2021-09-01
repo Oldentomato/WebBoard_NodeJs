@@ -10,10 +10,6 @@ const boardSchema = mongoose.Schema({
         type: String,
         maxlength: 200
     },
-    musicfilepath:{
-        type: String,
-        maxlength: 200
-    },
     title:{
         type: String,
         maxlength: 50

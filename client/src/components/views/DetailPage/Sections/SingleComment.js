@@ -3,6 +3,7 @@ import {Comment, Avatar, Button, Input} from 'antd'
 import TextArea from 'antd/lib/input/TextArea'
 import axios from 'axios'
 import {useSelector} from 'react-redux'
+import Like from './Like'
 
 function SingleComment(props) {
 
@@ -19,6 +20,7 @@ function SingleComment(props) {
     }
 
     const action = [
+        <Like style={{height:'1px'}} comment commentId={props.comment._id} userId={localStorage.getItem('userId')}/>,
         <span onClick={openReply} key = "comment-basic-reply-to">Reply to</span>
     ]
 

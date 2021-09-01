@@ -23,6 +23,7 @@ app.use(cookieParser())
 app.use('/api/users', require('./server/routes/users'))
 app.use('/api/board', require('./server/routes/uploads'))
 app.use('/api/comment',require('./server/routes/comment'))
+app.use('/api/like', require('./server/routes/like'))
 app.use('/uploads', express.static('uploads'))
 
 //빌드 시 express 가 실행되도록 하는 코드

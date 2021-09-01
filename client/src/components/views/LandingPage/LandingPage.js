@@ -32,14 +32,13 @@ function LandingPage(props) {
 
 
     const renderCards = Image.map((file, index)=>{
-
+        
          return(
-        <Col id={index} lg={6} md={8} xs={24}>
-            <div  style={{position: 'relative'}}>
-             <Link to={{pathname:`/Boards/${file._id}`,state:{views:file.views+1}}}>
+        <Col lg={6} md={8} xs={24}>
+            <div id={index} style={{position: 'relative',background:'rgba(150,150,150,0.5)', margin:'2px'}}>
+             <Link to={{pathname:`/Boards/${file._id}`,state:{views:file.views+1, isGPS:(file.longitude===null)?false:true}}}>
             
-            
-                <img style={{width: '20vw', height:'15vw',padding:'5% 10%' }} src={`http://localhost:5000/${file.filepath}`}/>  
+                <img style={{width: '20vw', height:'15vw',padding:'5% 15%'}} src={`http://localhost:5000/${file.filepath}`}/>  
 
             <Meta 
                 avatar = {
@@ -49,9 +48,9 @@ function LandingPage(props) {
                 style={{marginLeft:'7%'}}
             />
             <div>
-                <span style={{ color: '#fff'}}>{file.writer.name}</span><br />
-                <span style={{ marginLeft:'4rem', color: '#fff'}}>{file.views} views </span>
-                <span style={{color: '#fff'}}>{moment(file.createdAt).format("MMM Do YY")}</span>
+                <span style={{ color:'#fff'}}>{file.writer.name}</span><br />
+                <span style={{ marginLeft:'4rem',color:'#fff'}}>{file.views} views </span>
+                <span style={{ color:'#fff'}}>{moment(file.createdAt).format("MMM Do YY")}</span>
             </div>
             </Link>
             </div>

@@ -1,0 +1,70 @@
+.RecommendBtn 
+{
+    position: relative;
+    left: 28.5vw;
+    width: 60px;
+    height:30px;
+    -webkit-appearance: none;
+    background: #c6c6c6;
+    outline: none;
+    border-radius: 20px;
+    box-shadow: inset 0 0 5px rgba(0,0,0,.2);
+    transition: .3s;
+}
+.RecommendBtn:checked
+{
+    background: #f04d9f;
+}
+.RecommendBtn:before
+{
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    top: 0;
+    left: 0;
+    background: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,.2);
+    transition: .3s;
+}
+.RecommendBtn:checked:before
+{
+    left: 30px;
+}
+/*//////////////////////////////////////*/
+.LikeBtn
+{
+    position: relative;
+    width: 40px;
+    height:20px;
+    -webkit-appearance: none;
+    background: #c6c6c6;
+    outline: none;
+    border-radius: 20px;
+    box-shadow: inset 0 0 5px rgba(0,0,0,.2);
+    transition: .3s;
+}
+.LikeBtn:checked
+{
+    background: #f00c7e;
+}
+.LikeBtn:before
+{
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    top: 0;
+    left: 0;
+    background: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,.2);
+    transition: .3s;
+}
+.LikeBtn:checked:before
+{
+    left: 20px;
+}
