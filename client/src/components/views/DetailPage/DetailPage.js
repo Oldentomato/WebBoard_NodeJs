@@ -7,6 +7,7 @@ import {faWindowClose} from '@fortawesome/free-regular-svg-icons'
 import moment from 'moment'
 import Like from './Sections/Like'
 import {useSelector} from 'react-redux'
+import {Link} from 'react-router-dom'
 
 
 const {kakao} = window;
@@ -112,7 +113,7 @@ function DetailPage(props) {
                 <span style={{marginLeft:'50px'}}>writer:  {File.writer.name}</span>
                 <button style={{position:'absolute', border:'none', background:'none',cursor:'pointer',right:'5vw',top:'4vw'}}
                  onClick={BackPage}><FontAwesomeIcon size="3x" icon={faWindowClose} /> </button>
-                
+                {(user.userData._id === File.writer._id) && <Link style={{position: 'absolute', left:'25vw'}} to={{pathname:`/Board/${BoardId}/Modify`,state:{title:File.title, content:File.content, img:File.filepath}}}>Modify</Link>}
 
              <br />
              <img style={{position:'absoulte', width: '40vw', height: '30vw',padding: '1vw', marginLeft:'1vw', right:'5vw'}} src={`http://localhost:5000/${File.filepath}`}></img>

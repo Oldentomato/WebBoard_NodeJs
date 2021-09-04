@@ -2,6 +2,10 @@ const express = require('express')
 const router = express.Router()
 const multer = require('multer')
 const {Board} = require("../models/Board")
+const path = require('path')
+
+
+const {auth} = require("../middleware/auth")
 
 
 
@@ -11,17 +15,25 @@ var storage = multer.diskStorage({
     },
     filename: function(req, file, cb){
       cb(null, `${Date.now()}_${file.originalname}`)
-    },
-    fileFilter: (req, file, cb) => {
-      const ext = path.extname(file.originalname)
-      if(ext !=='.jpg'){
-        return cb(res.status(400).end('only jpg file is allowed'),false);
-      }
-      cb(null,true)
     }
+
   })
+
+  const fileFilter = function(req, file, callback) {
+    var ext = path.extname(file.originalname)
+    
+    // if(ext !=='.jpg'){
+    //   return callback(res.end('only jpg allowed'),false);
+    // }
+    callback(null,true)
+  }
+
   
-  var upload = multer({storage: storage}).single("file")
+  var upload = multer({
+    storage: storage,
+    fileFilter: fileFilter
+  }).single("file")
+
 
 
   router.post("/uploadfiles",(req,res)=>{
@@ -34,6 +46,7 @@ var storage = multer.diskStorage({
       })
   
 })
+
 
   
 router.post("/uploadinfo",(req,res)=>{

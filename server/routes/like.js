@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const {Like} = require('../models/Like')
-const { auth } = require("../middleware/auth")
+
 
 router.post('/getLikes', (req,res)=>{
     let variable ={}

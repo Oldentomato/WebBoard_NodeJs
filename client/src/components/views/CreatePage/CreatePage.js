@@ -6,6 +6,7 @@ import axios from 'axios'
 import EXIF from 'exif-js'
 import { useSelector } from 'react-redux'
 
+
 const {Title} = Typography;
 const {TextArea} = Input;
 
@@ -31,7 +32,6 @@ function CreatePage(props) {
 
     const onSubmit = (e) =>{
         e.preventDefault();
-
         //정보 서버올림
         const variables = {
             writer: user.userData._id,
@@ -42,6 +42,9 @@ function CreatePage(props) {
             longitude: Longitude
         }
         if(title === "" || Content === "" || FilePath === ""){
+            // fs.unlink(FilePath,()=>{
+            //     alert("내용을 모두 입력해주십시오")
+            // })
             alert("내용을 모두 입력해주십시오")
         }else{
             axios.post('/api/board/uploadinfo',variables)
@@ -53,7 +56,7 @@ function CreatePage(props) {
                     alert('업로드에 실패했습니다')
                 }
             })
-        }
+        }               
 
     }
 
@@ -69,12 +72,12 @@ function CreatePage(props) {
         axios.post('/api/board/uploadfiles', formData, config)//나중에 리덕스로 바꿔줘야한다
         .then(response=>{
             if(response.data.success){
-                setFilePath(response.data.filePath)
+                //setFilePath(response.data.filePath)
+                alert("dd")
             }else{
-                alert('failed to save the video in server')
+                alert('failed to save the image in server')
             }
-        })
-
+        })     
         EXIF.getData(files[0], function() {
                     
             if(EXIF.getTag(files[0], "GPSLongitude") !== undefined){
@@ -117,6 +120,7 @@ function CreatePage(props) {
         <div style={{ maxWidth: '700px', margin: '2rem auto '}}>
             <div style ={{ textAlign: 'center', marginBottom: '2rem' }}>
                 <Title level={2} style={{color: '#fff'}}> Upload Content</Title>
+
             </div>
             <Form>
                 <div style={{display: 'flex', justifyContent: 'space-between' }}>
@@ -136,7 +140,15 @@ function CreatePage(props) {
                         {FilePath}
                         <br />
 
-
+                {/* {window.addEventListener('beforeunload', (e)=>{
+                    e.preventDefault();
+                    alert("f")
+                    if(FilePath !== ""){
+                        fs.unlink(FilePath,()=>{
+                            alert('글쓰기를 취소했습니다')
+                        })
+                    }
+                })} */}
 
                 </div>
                 <br /><br />
