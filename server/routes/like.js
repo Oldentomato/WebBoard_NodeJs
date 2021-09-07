@@ -5,10 +5,10 @@ const {Like} = require('../models/Like')
 
 router.post('/getLikes', (req,res)=>{
     let variable ={}
-    if(req.body.boardId){
-        variable = {boardId: req.body.boardId}
-    }else{
+    if(req.body.commentId){
         variable = {commentId: req.body.commentId}
+    }else{
+        variable = {boardId: req.body.boardId, commentId:undefined}
     }
 
     Like.find(variable)
@@ -20,10 +20,11 @@ router.post('/getLikes', (req,res)=>{
 
 router.post('/upLike', (req,res)=>{
     let variable ={}
-    if(req.body.boardId){
-        variable = {boardId: req.body.boardId, userId: req.body.userId}
+    if(req.body.commentId){
+        variable = {boardId: req.body.boardId, commentId: req.body.commentId, userId: req.body.userId}
+        
     }else{
-        variable = {commentId: req.body.commentId, userId: req.body.userId}
+        variable = {boardId: req.body.boardId, userId: req.body.userId}
     }
 
     const like = new Like(variable)
@@ -36,10 +37,11 @@ router.post('/upLike', (req,res)=>{
 
 router.post('/unLike', (req,res)=>{
     let variable ={}
-    if(req.body.boardId){
-        variable = {boardId: req.body.boardId, userId: req.body.userId}
+    if(req.body.commentId){
+        variable = {boardId: req.body.boardId, commentId: req.body.commentId, userId: req.body.userId}
+        
     }else{
-        variable = {commentId: req.body.commentId, userId: req.body.userId}
+        variable = {boardId: req.body.boardId, userId: req.body.userId, commentId:undefined}
     }
 
     Like.findOneAndDelete(variable)
@@ -49,5 +51,11 @@ router.post('/unLike', (req,res)=>{
     })
 })
 
+router.post('/deleteLike', (req,res)=>{//댓글좋아요도 없애는 기능넣어야함
+    Like.deleteMany({boardId:req.body.BoardId},(err)=>{
+        if(err)return res.json({success:false, err})
+        return res.json({success: true})
+    })
+})
 
 module.exports = router;

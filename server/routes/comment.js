@@ -29,5 +29,12 @@ router.post("/getComments", (req, res) => {
     })
 })
 
+router.post("/deleteComment",(req,res)=>{
+    Comment.deleteMany({postId: req.body.BoardId}, (err)=>{
+        if(err) return res.json({success: false, err})
+        return res.json({success: true})
+    })
+})
+
 
 module.exports = router;

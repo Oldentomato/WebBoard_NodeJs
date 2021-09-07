@@ -72,8 +72,7 @@ function CreatePage(props) {
         axios.post('/api/board/uploadfiles', formData, config)//나중에 리덕스로 바꿔줘야한다
         .then(response=>{
             if(response.data.success){
-                //setFilePath(response.data.filePath)
-                alert("dd")
+                setFilePath(response.data.filePath)
             }else{
                 alert('failed to save the image in server')
             }

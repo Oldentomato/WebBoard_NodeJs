@@ -20,7 +20,7 @@ function SingleComment(props) {
     }
 
     const action = [
-        <Like style={{height:'1px'}} comment commentId={props.comment._id} userId={localStorage.getItem('userId')}/>,
+        <Like style={{height:'1px'}} comment boardId = {props.postId} commentId={props.comment._id} userId={props.userId}/>,
         <span onClick={openReply} key = "comment-basic-reply-to">Reply to</span>
     ]
 
@@ -40,7 +40,6 @@ function SingleComment(props) {
             axios.post('/api/comment/saveComment',variables)
             .then(response=>{
                 if(response.data.success){
-                    console.log(response.data.result)
                     setCommentValue("")
                     setOpenReply(!OpenReply)
                     props.refreshFunction(response.data.result)

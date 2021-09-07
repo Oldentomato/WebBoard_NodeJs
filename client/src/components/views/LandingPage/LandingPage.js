@@ -35,7 +35,7 @@ function LandingPage(props) {
         
          return(
         <Col lg={6} md={8} xs={24}>
-            <div id={index} style={{position: 'relative',background:'rgba(150,150,150,0.5)', margin:'2px'}}>
+            <div id={index} style={{position: 'relative', margin:'2px'}}>
              <Link to={{pathname:`/Boards/${file._id}`,state:{views:file.views+1, isGPS:(file.longitude===null)?false:true}}}>
             
                 <img style={{width: '20vw', height:'15vw',padding:'5% 15%'}} src={`http://localhost:5000/${file.filepath}`}/>  

@@ -11,10 +11,10 @@ function Like(props) {
     const [LikeAction, setLikeAction] = useState(null)
     let variable = {}
 
-    if(props.board){
-        variable = {boardId: props.boardId, userId:props.userId}
+    if(props.comment){
+        variable = {boardId: props.boardId, commentId: props.commentId, userId:props.userId}
     }else{
-        variable = {commentId: props.commentId, userId:props.userId}
+        variable = {boardId: props.boardId, userId:props.userId}
     }
 
     const onLike = () =>{
