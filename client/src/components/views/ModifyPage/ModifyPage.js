@@ -80,33 +80,39 @@ function ModifyPage(props) {
         })
     }
 
-    return (
-        <div style={{display:'flex', justifyContent:'center',alignItems:'center',
-        width:'50%',height:'60vh',background:'#E6E6E6', borderRadius:'10px',margin:'10% 25%'}}>
-            {isLoading && <Loading/>}
-            <Form>
-                <img style={{width: '40vw', height: '30vw'}} src={`http://localhost:5000/${Img}`}></img>
-                <br/>
-                <label>Title</label>
-                <Input 
-                    onChange={onTitleHandler}
-                    value={Posttitle}
-                />
-                <br/>
-                <label>Content</label>
-                <TextArea 
-                    onChange={onContetHandler}
-                    value = {Content}
-                />
-                <br/>
-                <br />
-                <Button style={{margin:'0 5px'}} type="primary" size="large" onClick={onSubmit}>Submit</Button>
-                <Button style={{margin:'0 5px'}} type="default" size="large" onClick={CancelHandler}>Cancel</Button>
-                <Button style={{margin:'0 5px'}} type="primary" danger="true" size="large" onClick={onDelete}>Delete</Button>
+    if(isLoading){
+        return(
+            <Loading/>
+        )
+    }else{
+        return (
+            <div style={{display:'flex', justifyContent:'center',alignItems:'center',
+            width:'50%',height:'60vh',background:'#E6E6E6', borderRadius:'10px',margin:'10% 25%'}}>
+                <Form>
+                    <img style={{width: '40vw', height: '30vw'}} src={`http://localhost:5000/${Img}`}></img>
+                    <br/>
+                    <label>Title</label>
+                    <Input 
+                        onChange={onTitleHandler}
+                        value={Posttitle}
+                    />
+                    <br/>
+                    <label>Content</label>
+                    <TextArea 
+                        onChange={onContetHandler}
+                        value = {Content}
+                    />
+                    <br/>
+                    <br />
+                    <Button style={{margin:'0 5px'}} type="primary" size="large" onClick={onSubmit}>Submit</Button>
+                    <Button style={{margin:'0 5px'}} type="default" size="large" onClick={CancelHandler}>Cancel</Button>
+                    <Button style={{margin:'0 5px'}} type="primary" danger="true" size="large" onClick={onDelete}>Delete</Button>
+    
+                </Form>
+            </div>
+        )
+    }
 
-            </Form>
-        </div>
-    )
 }
 
 export default withRouter(ModifyPage)

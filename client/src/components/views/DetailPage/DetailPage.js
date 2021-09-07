@@ -8,6 +8,7 @@ import moment from 'moment'
 import Like from './Sections/Like'
 import {useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
+import Loading from '../LoadingScene/Loading'
 
 
 const {kakao} = window;
@@ -63,6 +64,10 @@ function DetailPage(props) {
         setCommentLists(CommentLists.concat(newComment))
     }
 
+    const pagescroll = () =>{
+        window.scrollTo(0,props.location.state.scroll)
+    }
+
     const CheckGPS = () => {
         if(isGPS){
             return(<div>
@@ -105,6 +110,7 @@ function DetailPage(props) {
     return (
         <div className="postPage" style={{position:'absolute',padding: '6.5vw 6.5vw',width:'100%', background: 'rgba(0,0,0,0.5)',zIndex:'20',top:'0%'}}>
             <div style={{position:'relative',background:"#E6E6E6",width:'56%',padding: '3vw',marginLeft:'20%',borderRadius:'10px'}}>
+            {console.log(props.location.state.scroll)}
             <List.Item.Meta
                     avatar={<Avatar src={File.writer && File.writer.image} />}
                     title={<a style={{ fontSize:'25px', fontWeight:'700'}} href="https://ant.design">{File.title}</a>}                
@@ -140,7 +146,7 @@ function DetailPage(props) {
     )
     }else{
         return(
-            <div style={{position:'fixed',color:'#fff', top:'0%'}}>Loading...</div>
+            <Loading/>//아왜안돼임넝ㅁ나어ㅣㅁ나어민어ㅑ미먀처미ㅑㄴ첨냐처ㅣㅌㅋ타처키타처키ㅑㅓ키ㅑ처ㅣㅑ텇키타첰팇컽차커ㅣ타처키타처ㅣㅋ타첰ㅊㅌ
         )
     }
 }

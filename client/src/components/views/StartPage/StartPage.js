@@ -43,7 +43,7 @@ function Startpage() {
                 </section>
                 <div className="sec" id="sec">
                     <h2>Polaroid</h2>
-                    <p>Polaroid에 오신것을 환영합니다<br/><br/>
+                    <p>Polaroid에 오신것을 환영합니다</p><br/><br/>
                     <br/><br/>
                     <br/><br/>
                     <br/><br/>
@@ -56,7 +56,7 @@ function Startpage() {
                     <br/><br/>
                     <br/><br/>
                     <br/><br/>
-                    </p>
+                    
                 </div>
                 {ScrollEvent()}
             </div>
