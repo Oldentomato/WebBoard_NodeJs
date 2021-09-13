@@ -61,7 +61,7 @@ function LandingPage(props) {
     })
 
     return (
-        <div className="LandingPage" style={{position: 'relative', padding: '5%', width: '85%', margin: '4rem auto'}}>
+        <div className="LandingPage" style={{position: 'relative', padding: '5%', width: '85%',margin: '4rem auto'}}>
             <Link className = "writebtn" to="/Create" style={{
                     position: 'absolute',
                     right: '5vw',
@@ -75,9 +75,11 @@ function LandingPage(props) {
             <Title level={2} style={{ color: '#fff'}}>Contents</Title>
             <hr />
             <br />
+            <div style={{ height:'35vw',overflow:'scroll',overflowX:'hidden'}}>
             <Row>
                 {renderCards}
             </Row>
+            </div>
            
         </div>
     )

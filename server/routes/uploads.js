@@ -68,6 +68,13 @@ router.get("/getimages",(req,res)=>{
   })
 })
 
+router.post("/getuserimages",(req,res)=>{
+  Board.find({writer: req.body.writer},(err,board)=>{
+    if(err) return res.json({success:false, err})
+    return res.status(200).json({success:true, board})
+  })
+})
+
 router.post("/getimage",(req,res)=>{
   Board.findOneAndUpdate({_id: req.body.BoardId},
   {views: req.body.Views})

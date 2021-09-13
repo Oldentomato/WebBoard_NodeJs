@@ -12,8 +12,21 @@ body
 {
     min-height: 100vh;
     overflow-x: hidden;
+    overflow-y: hidden;
     background: linear-gradient(#2b1055,#7597de);
 
+}
+::-webkit-scrollbar{
+    width: 12px;
+}
+
+::-webkit-scrollbar-thumb{
+    background: linear-gradient(transparent, #4fc518);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: linear-gradient(transparent, #00c6ff);
 }
 
 

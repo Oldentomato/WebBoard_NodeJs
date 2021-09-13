@@ -20,7 +20,7 @@ function LoginPage(props) {
     }
 
     const onSubmitHandler = (e) => {
-        //e.preventDefault();//이 함수가 있으면 페이지가 refresh를 하지 않는다
+        e.preventDefault();//이 함수가 있으면 페이지가 refresh를 하지 않는다
         let body ={
             email: Email,
             password: Password
@@ -31,6 +31,7 @@ function LoginPage(props) {
                 window.location.replace("/Boards")
             }else{
                 alert(response.payload.message)
+
                 //response.payload 는 서버의 index에서 로그인 시도
                 //한 뒤의 결과 json파일을 가져온다(loginSuccess,message)
 

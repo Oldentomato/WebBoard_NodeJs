@@ -13,6 +13,7 @@ import NavBar from "./components/views/NavBar/NavBar"
 import CreatePage from "./components/views/CreatePage/CreatePage"
 import DetailPage from "./components/views/DetailPage/DetailPage"
 import ModifyPage from "./components/views/ModifyPage/ModifyPage"
+import UserInfoPage from "./components/views/UserInfoPage/UserInfoPage"
 import Auth from "./hoc/auth";
 
 function App() {
@@ -26,7 +27,8 @@ function App() {
         <Route exact path ="/Register" component={Auth(RegisterPage,false)} />
         <Route exact path = "/" component={Auth(StartPage, null)}/>
         <Route exact path = "/Create" component={Auth(CreatePage, true)}/>
-        <Route exact path = "/Board/:BoardId/Modify" component={Auth(ModifyPage, null)}/>   
+        <Route exact path = "/Board/:BoardId/Modify" component={Auth(ModifyPage, null)}/> 
+        <Route exact path = "/User" component={Auth(UserInfoPage, true)}/>  
       </Switch>
      
       </Suspense>

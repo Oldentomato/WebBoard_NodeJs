@@ -87,9 +87,9 @@ function ModifyPage(props) {
     }else{
         return (
             <div style={{display:'flex', justifyContent:'center',alignItems:'center',
-            width:'50%',height:'60vh',background:'#E6E6E6', borderRadius:'10px',margin:'10% 25%'}}>
+            width:'50%',height:'75vh',background:'#E6E6E6', borderRadius:'10px',margin:'10% 25%'}}>
                 <Form>
-                    <img style={{width: '40vw', height: '30vw'}} src={`http://localhost:5000/${Img}`}></img>
+                    <img style={{width: '30vw', height: '20vw'}} src={`http://localhost:5000/${Img}`}></img>
                     <br/>
                     <label>Title</label>
                     <Input 

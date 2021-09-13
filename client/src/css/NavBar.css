@@ -1,4 +1,4 @@
-.NavBar p 
+.User
 {
     position: absolute;
     font-size: 1.5em;
@@ -6,14 +6,7 @@
     left: 53%;
     top: 70%;
 }
-.UserIn 
-{
-    opacity: 1
-}
-.UserOut 
-{
-    opacity: 0
-}
+
 .NavBar header
 {
     position: absolute;

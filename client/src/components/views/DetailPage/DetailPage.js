@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import {List, Avatar, Typography} from 'antd'
+import {List, Avatar} from 'antd'
 import axios from 'axios'
 import Comment from './Sections/Comments'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -64,10 +64,6 @@ function DetailPage(props) {
         setCommentLists(CommentLists.concat(newComment))
     }
 
-    const pagescroll = () =>{
-        window.scrollTo(0,props.location.state.scroll)
-    }
-
     const CheckGPS = () => {
         if(isGPS){
             return(<div>
@@ -108,15 +104,14 @@ function DetailPage(props) {
 
     if(File.writer){//axios에서 File정보를 받아오는데 시간이 걸려서 File부분이 undefiended가 될때가 있는데 이것을 로딩으로 메꿔줘서 에러를 방지한다
     return (
-        <div className="postPage" style={{position:'absolute',padding: '6.5vw 6.5vw',width:'100%', background: 'rgba(0,0,0,0.5)',zIndex:'20',top:'0%'}}>
+        <div className="postPage" style={{position:'absolute',padding: '6.5vw 6.5vw',width:'100%', background: 'rgba(0,0,0,0.5)',zIndex:'20',top:'0%',overflow:'scroll',height:'100%'}}>
             <div style={{position:'relative',background:"#E6E6E6",width:'56%',padding: '3vw',marginLeft:'20%',borderRadius:'10px'}}>
-            {console.log(props.location.state.scroll)}
             <List.Item.Meta
                     avatar={<Avatar src={File.writer && File.writer.image} />}
                     title={<a style={{ fontSize:'25px', fontWeight:'700'}} href="https://ant.design">{File.title}</a>}                
                 />
                 <span style={{marginLeft:'50px'}}>{moment(File.createdAt).format("MMM Do YY")}</span>
-                <span style={{marginLeft:'50px'}}>writer:  {File.writer.name}</span>
+                <span style={{marginLeft:'50px'}}>writer:  <Link to={{pathname:'/User',state:{user:File.writer}}}>{File.writer.name}</Link></span>
                 <button style={{position:'absolute', border:'none', background:'none',cursor:'pointer',right:'5vw',top:'4vw'}}
                  onClick={BackPage}><FontAwesomeIcon size="3x" icon={faWindowClose} /> </button>
                 {(user.userData._id === File.writer._id) && <Link style={{position: 'absolute', left:'25vw'}} to={{pathname:`/Board/${BoardId}/Modify`,state:{title:File.title, content:File.content, img:File.filepath}}}>Modify</Link>}

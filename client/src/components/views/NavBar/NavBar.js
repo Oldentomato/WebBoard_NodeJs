@@ -4,17 +4,21 @@ import {auth} from '../../../_actions/user_action'
 import {useDispatch} from 'react-redux'
 import {Style} from '../../../css/NavBar.css'
 import axios from 'axios'
+import { MailTwoTone, PrinterFilled } from '@ant-design/icons'
 
 function NavBar() {
     const dispatch = useDispatch();
 
     const [Name, setName] = useState("");
     const [isUser, setIsUser] = useState("");
+    const [user, setuser] = useState("");
+
     useEffect(()=>{
         dispatch(auth())
         .then(response=>{
             if(response.payload.name !== undefined){
                 setIsUser(true)
+                setuser(response.payload)
                 if(response.payload.isAdmin === true){
                     setName("관리자")
                 }else{
@@ -41,7 +45,6 @@ function NavBar() {
     }
 
 
-
     return (
         <div className="NavBar" style={Style}>
             <header>
@@ -55,9 +58,10 @@ function NavBar() {
 
                 </ul>
                 <br/>
-                <p className={isUser ? "UserIn" : "UserOut"}>
+                {isUser&&<Link className="User" to={{pathname:'/User', state:{user:user}}}>
                     {Name}님 환영합니다
-                </p>
+                </Link>}
+
             </header>
         </div>
     )
