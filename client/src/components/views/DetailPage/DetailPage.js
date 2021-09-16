@@ -108,7 +108,7 @@ function DetailPage(props) {
             <div style={{position:'relative',background:"#E6E6E6",width:'56%',padding: '3vw',marginLeft:'20%',borderRadius:'10px'}}>
             <List.Item.Meta
                     avatar={<Avatar src={File.writer && File.writer.image} />}
-                    title={<a style={{ fontSize:'25px', fontWeight:'700'}} href="https://ant.design">{File.title}</a>}                
+                    title={<a style={{ fontSize:'25px', fontWeight:'700'}}>{File.title}</a>}                
                 />
                 <span style={{marginLeft:'50px'}}>{moment(File.createdAt).format("MMM Do YY")}</span>
                 <span style={{marginLeft:'50px'}}>writer:  <Link to={{pathname:'/User',state:{user:File.writer}}}>{File.writer.name}</Link></span>
@@ -141,7 +141,7 @@ function DetailPage(props) {
     )
     }else{
         return(
-            <Loading/>//아왜안돼임넝ㅁ나어ㅣㅁ나어민어ㅑ미먀처미ㅑㄴ첨냐처ㅣㅌㅋ타처키타처키ㅑㅓ키ㅑ처ㅣㅑ텇키타첰팇컽차커ㅣ타처키타처ㅣㅋ타첰ㅊㅌ
+            <Loading/>
         )
     }
 }

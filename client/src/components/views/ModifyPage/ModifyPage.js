@@ -1,13 +1,13 @@
 import React,{useState} from 'react'
 import {withRouter} from 'react-router-dom'
-import { Typography, Button, Form, Input } from 'antd'
+import {Button, Form, Input } from 'antd'
 import axios from 'axios'
 import Loading from '../LoadingScene/Loading'
 
-const {Title} = Typography;
+
 const {TextArea} = Input;
 
-//주소 url을 통해 본인이 아닌 게시물에 modify를 접근할수있다 여기서 한번 더 체크하는 부분을 만들어야한다
+
 function ModifyPage(props) {
 
     const [Posttitle,setPosttitle] = useState(props.location.state.title);
