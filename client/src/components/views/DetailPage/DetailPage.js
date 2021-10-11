@@ -117,7 +117,7 @@ function DetailPage(props) {
                 {(user.userData._id === File.writer._id) && <Link style={{position: 'absolute', left:'25vw'}} to={{pathname:`/Board/${BoardId}/Modify`,state:{title:File.title, content:File.content, img:File.filepath}}}>Modify</Link>}
 
              <br />
-             <img style={{position:'absoulte', width: '40vw', height: '30vw',padding: '1vw', marginLeft:'1vw', right:'5vw'}} src={`http://localhost:5000/${File.filepath}`}></img>
+             <img style={{position:'absoulte', width: '40vw', height: '30vw',padding: '1vw', marginLeft:'1vw', right:'5vw'}} src={`http://3.141.196.160:5000/${File.filepath}`}></img>
 
             <List.Item 
                 actions={[<Like board boardId={BoardId} userId={user.userData._id}/>]}

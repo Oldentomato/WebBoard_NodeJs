@@ -26,7 +26,7 @@ function UserInfoPage(props) {
             <div style={{float:'left'}}>
                  <Link to={{pathname:`/Boards/${file._id}`,state:{views:file.views+1, isGPS:(file.longitude===null)?false:true, scroll:window.scrollY}}}>
             
-            <img style={{width: '15vw', height:'10vw',padding:'5% 15%'}} src={`http://localhost:5000/${file.filepath}`}/>  
+            <img style={{width: '15vw', height:'10vw',padding:'5% 15%'}} src={`http://3.141.196.160:5000/${file.filepath}`}/>  
 
         <Meta 
             title={file.title}

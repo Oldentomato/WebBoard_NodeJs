@@ -89,7 +89,7 @@ function ModifyPage(props) {
             <div style={{display:'flex', justifyContent:'center',alignItems:'center',
             width:'50%',height:'75vh',background:'#E6E6E6', borderRadius:'10px',margin:'10% 25%'}}>
                 <Form>
-                    <img style={{width: '30vw', height: '20vw'}} src={`http://localhost:5000/${Img}`}></img>
+                    <img style={{width: '30vw', height: '20vw'}} src={`http://3.141.196.160:5000/${Img}`}></img>
                     <br/>
                     <label>Title</label>
                     <Input 

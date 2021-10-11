@@ -38,7 +38,7 @@ function LandingPage(props) {
             <div id={index} style={{position: 'relative', margin:'2px'}}>
              <Link to={{pathname:`/Boards/${file._id}`,state:{views:file.views+1, isGPS:(file.longitude===null)?false:true, scroll:window.scrollY}}}>
             
-                <img style={{width: '20vw', height:'15vw',padding:'5% 15%'}} src={`http://localhost:5000/${file.filepath}`}/>  
+                <img style={{width: '20vw', height:'15vw',padding:'5% 15%'}} src={`http://3.141.196.160:5000/${file.filepath}`}/>  
 
             <Meta 
                 avatar = {

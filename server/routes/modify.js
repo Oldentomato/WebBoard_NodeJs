@@ -32,4 +32,13 @@ router.post('/deleteContent',(req,res)=>{
 
 })
 
+router.post('/deleteImg',(req,res)=>{
+    fs.unlink(req.body.FilePath,(err)=>{
+        if(err){
+            console.log("사진 삭제 Error")
+        }
+        return res.status(200).json({success: true})
+    })
+})
+
 module.exports = router;

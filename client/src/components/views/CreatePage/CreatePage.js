@@ -1,10 +1,11 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import {Typography, Button, Form, Input} from 'antd'
 import {PlusOutlined} from '@ant-design/icons'
 import DropZone from 'react-dropzone'
 import axios from 'axios'
 import EXIF from 'exif-js'
 import { useSelector } from 'react-redux'
+import Loading from '../LoadingScene/Loading'
 
 
 const {Title} = Typography;
@@ -21,6 +22,7 @@ function CreatePage(props) {
     const [Latitude, setLatitude] = useState("");
     const [Longitude, setLongitude] = useState("");
     const [CautionGPS, setCautionGPS] = useState("");
+    const [isImgUpload , setisImgUpload] = useState(false);
 
     const handleChangeTitle = (e) =>{
         setTitle(e.currentTarget.value)
@@ -42,9 +44,6 @@ function CreatePage(props) {
             longitude: Longitude
         }
         if(title === "" || Content === "" || FilePath === ""){
-            // fs.unlink(FilePath,()=>{
-            //     alert("내용을 모두 입력해주십시오")
-            // })
             alert("내용을 모두 입력해주십시오")
         }else{
             axios.post('/api/board/uploadinfo',variables)
@@ -60,8 +59,25 @@ function CreatePage(props) {
 
     }
 
+    useEffect(()=>{
+        return ()=>{
+            if(FilePath !== ""){
+                axios.post('/api/modify/deleteImg',{FilePath:FilePath})
+                .then(response=>{
+                    if(response.data.success){
+                        alert("사진삭제를 완료했습니다.")
+                    }else{
+                        alert("사진삭제에 실패했습니다")
+                    }
+                })
+            } 
+        }
+    },[FilePath])
+
+
     const onDrop = (files) =>{
         //사진 서버올림
+        setisImgUpload(true);
         let formData = new FormData();
         const config = {
             header: {'content-type': 'multipart/form-data'}
@@ -73,6 +89,7 @@ function CreatePage(props) {
         .then(response=>{
             if(response.data.success){
                 setFilePath(response.data.filePath)
+                setisImgUpload(false);
             }else{
                 alert('failed to save the image in server')
             }
@@ -121,6 +138,7 @@ function CreatePage(props) {
                 <Title level={2} style={{color: '#fff'}}> Upload Content</Title>
 
             </div>
+            {isImgUpload&&<Loading infostring="이미지 업로드중"/>}
             <Form>
                 <div style={{display: 'flex', justifyContent: 'space-between' }}>
                     <DropZone 
@@ -139,19 +157,11 @@ function CreatePage(props) {
                         {FilePath}
                         <br />
 
-                {/* {window.addEventListener('beforeunload', (e)=>{
-                    e.preventDefault();
-                    alert("f")
-                    if(FilePath !== ""){
-                        fs.unlink(FilePath,()=>{
-                            alert('글쓰기를 취소했습니다')
-                        })
-                    }
-                })} */}
+
 
                 </div>
                 <br /><br />
-                <h2 style={{color: '#fff'}}>*업로드시 자동으로 이미지의 위치정보를 가져옵니다(EXIF 가필요)</h2>
+                <h2 style={{color: '#fff'}}>*업로드시 자동으로 이미지의 위치정보를 가져옵니다(EXIF가 필요)</h2>
                 <br />
                 {CautionGPS}
                 <br /><br />

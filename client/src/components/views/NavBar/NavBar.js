@@ -4,7 +4,7 @@ import {auth} from '../../../_actions/user_action'
 import {useDispatch} from 'react-redux'
 import {Style} from '../../../css/NavBar.css'
 import axios from 'axios'
-import { MailTwoTone, PrinterFilled } from '@ant-design/icons'
+
 
 function NavBar() {
     const dispatch = useDispatch();
