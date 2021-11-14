@@ -7,6 +7,12 @@
     top: 70%;
 }
 
+.NavBar .Alert
+{
+    position: absolute;
+    left: 30%;
+}
+
 .NavBar header
 {
     position: absolute;

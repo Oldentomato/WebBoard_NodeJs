@@ -83,4 +83,9 @@ router.post('/register',(req,res) => {
       //res.sendFile(path.join(__dirname,'./client/build/index.html'))
   })
 
+  router.get('/isonline',(req,res)=>{
+    res.status(200).json({online: true})
+    
+  })
+
   module.exports = router

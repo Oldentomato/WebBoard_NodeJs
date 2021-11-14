@@ -12,8 +12,23 @@ function NavBar() {
     const [Name, setName] = useState("");
     const [isUser, setIsUser] = useState("");
     const [user, setuser] = useState("");
+    const [isOnline, setisOnline] = useState(false);
 
     useEffect(()=>{
+        CheckUser()
+        CheckOnline()
+    })
+
+    const CheckOnline = () =>{
+        axios.get('/api/users/isonline').then(res=>{
+            if(res.data.online)
+                setisOnline(true)
+            else
+                setisOnline(false)
+        })
+    }
+
+    const CheckUser = () =>{
         dispatch(auth())
         .then(response=>{
             if(response.payload.name !== undefined){
@@ -29,7 +44,7 @@ function NavBar() {
                 setIsUser(false)
             }
         })
-    })
+    }
 
     const onClickHandler = () =>{
         axios.get('api/users/logout')
@@ -49,6 +64,9 @@ function NavBar() {
         <div className="NavBar" style={Style}>
             <header>
                 <Link to="/" className="logo">POLAROID</Link>
+                <div className="Alert">
+                {isOnline?<h2 style={{color:"#00FF00"}}>ServerOnline</h2>:<h2 style={{color:"#FF4500"}}>ServerOffline</h2>}
+                </div>
                 <ul>
                     <li><a href="#" >Home</a></li>
                     <li><Link to="/Boards">Board</Link></li>
