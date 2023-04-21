@@ -17,13 +17,18 @@
 - EXIF  
 
 > 완성된 이미지들  
-![Image_1](https://github.com/Oldentomato/WebBoard_NodeJs/blob/main/README_imgs/image_1.png "메인화면")  
+![Image_1](https://github.com/Oldentomato/WebBoard_NodeJs/blob/main/README_imgs/image_1.png)  
 [참고](#메인화면css디자인)  
-![Image_2](https://github.com/Oldentomato/WebBoard_NodeJs/blob/main/README_imgs/image_2.png "게시물 목록 올린사람과 조회수까지 확인이 가능")  
-![Image_3](https://github.com/Oldentomato/WebBoard_NodeJs/blob/main/README_imgs/image_3.png "해당 사용자 프로필. 어떤 게시물을 올렸는지 확인이 가능")  
-![Image_4](https://github.com/Oldentomato/WebBoard_NodeJs/blob/main/README_imgs/image_4.png "게시물 세부내용 보기화면_1 추천버튼기능 있음 지도를 닫을때는 해당 이미지 주소를 보여줌")  
-![Image_6](https://github.com/Oldentomato/WebBoard_NodeJs/blob/main/README_imgs/image_6.png "게시물 세부내용 보기화면_2 댓글과 리플기능이 구현됨")  
-![Image_5](https://github.com/Oldentomato/WebBoard_NodeJs/blob/main/README_imgs/image_5.png "사진업로드 화면")  
+![Image_2](https://github.com/Oldentomato/WebBoard_NodeJs/blob/main/README_imgs/image_2.png )  
+게시물 목록 올린사람과 조회수까지 확인이 가능  
+![Image_3](https://github.com/Oldentomato/WebBoard_NodeJs/blob/main/README_imgs/image_3.png)  
+해당 사용자 프로필. 어떤 게시물을 올렸는지 확인이 가능  
+![Image_4](https://github.com/Oldentomato/WebBoard_NodeJs/blob/main/README_imgs/image_4.png )  
+게시물 세부내용 보기화면_1 추천버튼기능 있음 지도를 닫을때는 해당 이미지 주소를 보여줌  
+![Image_6](https://github.com/Oldentomato/WebBoard_NodeJs/blob/main/README_imgs/image_6.png )  
+게시물 세부내용 보기화면_2 댓글과 리플기능이 구현됨  
+![Image_5](https://github.com/Oldentomato/WebBoard_NodeJs/blob/main/README_imgs/image_5.png )  
+사진업로드 화면  
 
 > 참고된 자료들  
 
