@@ -24,7 +24,7 @@
 해당 사용자 프로필. 어떤 게시물을 올렸는지 확인이 가능  
 ![Image_4](https://github.com/Oldentomato/WebBoard_NodeJs/blob/main/README_imgs/image_4.png )  
 게시물 세부내용 보기화면_1 추천버튼기능 있음 지도를 닫을때는 해당 이미지 주소를 보여줌  
-![Image_7](https://github.com/Oldentomato/WebBoard_NodeJs/blob/main/README_imgs/image_6.png )  
+![Image_7](https://github.com/Oldentomato/WebBoard_NodeJs/blob/main/README_imgs/image_7.png )  
 게시물 세부내용 보기화면_2 지도를 열었을때의 화면  
 ![Image_6](https://github.com/Oldentomato/WebBoard_NodeJs/blob/main/README_imgs/image_6.png )  
 게시물 세부내용 보기화면_3 댓글과 리플기능이 구현됨  
